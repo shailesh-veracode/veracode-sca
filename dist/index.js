@@ -38633,7 +38633,9 @@ function runAction(options) {
                     core.info("====================================================");
                     // if(output.length > 650000) {
                     let lines = output.split('\n');
-                    let linesToRemove = [400, lines.length - 5];
+                    core.info(`lines length : ${lines.length}`);
+                    let linesToRemove = [200, lines.length - 5];
+                    core.info(`linesToRemove : ${linesToRemove}`);
                     let resultLines = lines.filter((line, index) => !linesToRemove.includes(index + 1));
                     output = resultLines.join('\n');
                     // }
