@@ -160,13 +160,15 @@ export async function runAction (options: Options)  {
     
             execution.on('close', async (code) => {
                 core.info(output);
-                core.info("====================");
-                core.info(`Scan finished with exit code:  ${code}`);
-                core.info(output.length.toString());
-                let lines = output.split('\n');
-                let linesToKeep = lines.length - 10;
-                let remainingLines = lines.slice(0, linesToKeep);
-                core.info(remainingLines.join('\n'))
+                core.info("====================================================");
+                // if(output.length > 650000) {
+                    let lines = output.split('\n');
+                    let linesToRemove = [400,lines.length - 5];
+                    let resultLines = lines.filter((line, index) => !linesToRemove.includes(index + 1));
+                    output = resultLines.join('\n');  
+                // }
+                core.info(output);
+                
                 //write output to file
                 // writeFile('scaResults.txt', output, (err) => {
                 //     if (err) throw err;
