@@ -164,10 +164,8 @@ export async function runAction (options: Options)  {
                 // if(output.length > 650000) {
                     let lines = output.split('\n');
                     core.info(`lines length : ${lines.length}`);
-                    let linesToRemove = [200,lines.length - 5];
-                    core.info(`linesToRemove : ${linesToRemove}`);
-                    let resultLines = lines.filter((line, index) => !linesToRemove.includes(index + 1));
-                    output = resultLines.join('\n');  
+                    let remainingLines = lines.filter((line, index) => index < 200 || index > (lines.length - 5));
+                    output = remainingLines.join('\n');  
                 // }
                 core.info(output);
                 
